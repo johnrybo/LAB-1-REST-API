@@ -1,0 +1,20 @@
+GET http://localhost:3000/
+
+###
+
+GET http://localhost:3000/api/products
+
+###
+
+DELETE http://localhost:3000/api/products
+
+###
+
+POST http://localhost:3000/api/products
+Content-type: application/json
+
+{
+    "name": "Matta",
+    "description": "En fin matta",
+    "price": 2499
+}
