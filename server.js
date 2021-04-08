@@ -6,12 +6,14 @@ const products = [
     {
         "name": "Stol",
         "description": "En fin stol",
-        "price": 1499
+        "price": 1499,
+        "id": 1
     },
     {
         "name": "Soffa",
         "description": "En skön soffa",
-        "price": 8999
+        "price": 8999,
+        "id": 2
     }
 ];
 

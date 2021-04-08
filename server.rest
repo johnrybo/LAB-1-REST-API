@@ -16,5 +16,6 @@ Content-type: application/json
 {
     "name": "Matta",
     "description": "En fin matta",
-    "price": 2499
+    "price": 2499,
+    "id": 3
 }
