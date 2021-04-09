@@ -2,7 +2,7 @@ GET http://localhost:3000/
 
 ###
 
-GET http://localhost:3000/api/products
+GET http://localhost:3000/api/
 
 ###
 
@@ -10,12 +10,11 @@ DELETE http://localhost:3000/api/products
 
 ###
 
-POST http://localhost:3000/api/products
+POST http://localhost:3000/api/
 Content-type: application/json
 
 {
     "name": "Matta",
     "description": "En fin matta",
-    "price": 2499,
-    "id": 3
+    "price": 2499
 }
