@@ -1,86 +1,128 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const port = 3000;
 
 const products = [
-    {
-        name: "Stol",
-        description: "En fin stol",
-        price: 1499,
-        id: 1
-    },
-    {
-        name: "Soffa",
-        description: "En skön soffa",
-        price: 8999,
-        id: 2
-    }
+  {
+    name: "Stol",
+    description: "En fin stol",
+    price: 1499,
+    id: 1,
+  },
+  {
+    name: "Soffa",
+    description: "En skön soffa",
+    price: 8999,
+    id: 2,
+  },
 ];
 
-// Serve all files in the public folder
-app.use(express.static('public'))
-
-// Parse incoming body from json to js-object
+// Middleware (?)
+app.use(express.static("public"));
 app.use(express.json());
 
-// middleware
-app.use(express.static('public'))
+// GET-anrop som hämtar alla produkter
+app.get("/api", (req, res) => {
+  res.send(products);
+});
 
-app.use(express.json())
+// GET-anrop som hämtar en produkt med ett specifikt id
+app.get("/api/products/:id", (req, res) => {
+  const id = req.params.id;
 
-// GET-anrop till vår bas-url
-app.get('/api', (req, res) => {
-    res.send(products)
-})
+  const foundProduct = products.find((product) => {
+    return product.id == id;
+  });
 
-// GET-anrop till ett specifikt id
-app.get('/api/products/:id', (req, res) => {
-    const id = req.params.id
+  if (!foundProduct) {
+    res.json({ error: `Det finns ingen produkt med id: ${id}` });
+  }
 
-    const foundProduct = products.find((product) => {
-        return product.id == id
-    })
+  res.json(foundProduct);
+});
 
-    if(!foundProduct) {
-        res.json({"error": "Oops detta id finns ej..."})
-    }
+// PUT-anrop som ändrar priset på en specifik produkt
 
-    res.json(foundProduct)
-})
+app.put("/api/products/:id", (req, res) => {
+  const id = req.params.id;
+  const updatedProduct = products.find((product) => {
+    return product.id == id;
+  });
+
+  if (!updatedProduct) {
+    res.json({ error: `Det finns ingen produkt med id: ${id}` });
+    return;
+  }
+
+  updatedProduct.price = req.body.price;
+  res.send(updatedProduct);
+});
+
+// DELETE-anrop som tar bort en specifik produkt
+
+app.delete("/api/products/:id", (req, res) => {
+  const id = req.params.id;
+  const deletedProduct = products.find((product) => {
+    return product.id == id;
+  });
+
+  if (!deletedProduct) {
+    res.json({ error: `Det finns ingen produkt med id: ${id}` });
+    return;
+  }
+
+  // Delete
+  const index = products.indexOf(deletedProduct);
+  products.splice(index, 1);
+
+  // Return the same product
+  res.json(deletedProduct);
+});
 
 // POST-anrop
-app.post('/api', (req, res) => {
+app.post("/api", (req, res) => {
 
-    if (!req.body.name) {
-        res.json({"error": "Oops title finns ej..."})
-        return
+  if (!req.body.name) {
+    res.json({ error: "Produkten som försöker skapas saknar namn" });
+    return;
+  }
+
+  if (!req.body.description) {
+    res.json({ error: "Produkten som försöker skapas saknar beskrivning" });
+    return;
+  }
+
+  if (!req.body.price) {
+    res.json({ error: "Produkten som försöker skapas saknar pris" });
+    return;
+  }
+
+  const newProductName = req.body.name;
+  const newProductDescription = req.body.description;
+  const newProductPrice = req.body.price;
+
+  let newProductId = 0;
+  products.forEach((product) => {
+    if (product.id > newProductId) {
+      newProductId = product.id;
     }
-    const nameToSave = req.body.name
-    const descriptionToSave = req.body.description
-    const priceToSave = req.body.price
+  });
 
-    let idToSave = 0;
-    products.forEach((product) => {
-        if (product.id > idToSave) {
-            idToSave = product.id;
-        }
-    })
+  newProductId++;
 
-    idToSave++;
+  products.push({
+    id: newProductId,
+    name: newProductName,
+    description: newProductDescription,
+    price: newProductPrice,
+  });
 
-    products.push({
-        id: idToSave,
-        title: nameToSave,
-        description: descriptionToSave,
-        price: priceToSave
-    })
-
-    res.json({
-        status: "Ny produkt sparad"
-    })
-})
+  res.json({
+    status: "Ny produkt sparad",
+  });
+});
 
 // körs när servern och express-appen är igång
 app.listen(port, () => {
-    console.log(`App is running on http://localhost:${port}`)
-})
+  console.log(`App is running on http://localhost:${port}`);
+});

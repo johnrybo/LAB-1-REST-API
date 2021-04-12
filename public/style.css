@@ -1,0 +1,25 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body > * {
+    margin-bottom: 1rem;
+    padding: .5rem;
+}
+
+button {
+    width: 15rem;
+}
+
+input {
+    width: 15rem;
+}
+
+.productContainer {
+    display: flex;
+    justify-content: space-evenly;
+    width: 15rem;
+    background-color: lightblue;
+}
