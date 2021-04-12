@@ -4,16 +4,16 @@ const port = 3000;
 
 const products = [
   {
-    name: "Stol",
-    description: "En fin stol",
-    price: 1499,
     id: 1,
+    name: "Stol",
+    description: "En härlig stol",
+    price: 1499
   },
   {
+    id: 2,
     name: "Soffa",
     description: "En skön soffa",
-    price: 8999,
-    id: 2,
+    price: 8999
   },
 ];
 
@@ -41,7 +41,7 @@ app.get("/api/products/:id", (req, res) => {
   res.json(foundProduct);
 });
 
-// PUT-anrop som ändrar priset på en specifik produkt
+// PUT-anrop som ändrar en specifik produkt
 
 app.put("/api/products/:id", (req, res) => {
   const id = req.params.id;
@@ -54,9 +54,41 @@ app.put("/api/products/:id", (req, res) => {
     return;
   }
 
+  // let newProductId = 0;
+  // products.forEach((product) => {
+  //   if (product.id > newProductId) {
+  //     newProductId = product.id;
+  //   }
+  // });
+
+  // newProductId++;
+  // updatedProduct.id = newProductId;
+
+  updatedProduct.name = req.body.name;
+  updatedProduct.description = req.body.description;
   updatedProduct.price = req.body.price;
   res.send(updatedProduct);
-});
+ });
+
+// app.put("/api/products/:id", (req, res) => {
+//   let updatedProduct = products.findIndex((product) => {
+//     return product.id == req.params.id;
+//   });
+
+//   updatedProduct = {
+//     id: req.body.id,
+//     name: req.body.name,
+//     description: req.body.description,
+//     price: req.body.price
+//   }
+
+//   let index = products.findIndex((product) => {
+//     return product.id == req.params.id
+//     });
+    
+//     products[index] = updatedProduct;
+//     return res.send(products);
+//    });
 
 // DELETE-anrop som tar bort en specifik produkt
 
@@ -71,11 +103,8 @@ app.delete("/api/products/:id", (req, res) => {
     return;
   }
 
-  // Delete
   const index = products.indexOf(deletedProduct);
   products.splice(index, 1);
-
-  // Return the same product
   res.json(deletedProduct);
 });
 

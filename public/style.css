@@ -20,6 +20,5 @@ input {
 .productContainer {
     display: flex;
     justify-content: space-evenly;
-    width: 15rem;
     background-color: lightblue;
 }

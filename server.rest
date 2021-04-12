@@ -10,12 +10,14 @@ PUT http://localhost:3000/api/products/2
 Content-type: application/json
 
 {
-    "price": 1899
+    "name": "Hörnsoffa",
+    "description": "En bra hörnsoffa",
+    "price": 12999
 }
 
 ###
 
-DELETE http://localhost:3000/api/products/2
+DELETE http://localhost:3000/api/products/1
 
 ###
 

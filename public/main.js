@@ -1,8 +1,7 @@
 window.addEventListener("load", main);
 
 function main() {
-
-  showProductsInTable();
+  showAllProducts();
 
   const getAllProductsButton = document.createElement("button");
   getAllProductsButton.innerHTML = "Hämta alla produkter";
@@ -52,42 +51,40 @@ function main() {
   );
 }
 
-async function showProductsInTable() {
+async function showAllProducts() {
   const products = await makeRequest("/api", "GET");
 
-  products.forEach(product => {
+  let table = document.querySelector("table");
 
-    let productContainer = document.createElement('div')
-    productContainer.classList.add('productContainer')
+  products.forEach((product) => {
+    let tr = document.createElement("tr");
+    let cell1 = document.createElement("td");
+    let cell2 = document.createElement("td");
+    let cell3 = document.createElement("td");
+    let cell4 = document.createElement("td");
 
-    let id = document.createElement('p');
-    id.innerHTML = product.id;
-    let name = document.createElement('p');
-    name.innerHTML = product.name;
-    let description = document.createElement('p');
-    description.innerHTML = product.description;
-    let price = document.createElement('p');
-    price.innerHTML = product.price;
+    cell1.innerHTML = product.id;
+    cell2.innerHTML = product.name;
+    cell3.innerHTML = product.description;
+    cell4.innerHTML = product.price;
 
-    productContainer.append(id)
-    productContainer.append(name)
-    productContainer.append(description)
-    productContainer.append(price)
-    
-    document.body.append(productContainer);
+    tr.appendChild(cell1);
+    tr.appendChild(cell2);
+    tr.appendChild(cell3);
+    tr.appendChild(cell4);
+
+    table.appendChild(tr);
   });
-
 }
 
 async function getAllProducts() {
+  showAllProducts();
   const products = await makeRequest("/api", "GET");
-  showProductsInTable();
   return products;
 }
 
 async function getSpecificProduct(id) {
   const product = await makeRequest("/api/products/" + id, "GET");
-  showProductsInTable();
   return product;
 }
 
@@ -95,7 +92,6 @@ async function createNewProduct(name, description, price) {
   const body = { name: name, description: description, price: price };
 
   const status = await makeRequest("/api", "POST", body);
-  showProductsInTable();
   return status;
 }
 
