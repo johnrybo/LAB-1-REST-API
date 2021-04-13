@@ -7,8 +7,8 @@
   },
   {
     "id": 2,
-    "name": "Hörnsoffa",
-    "description": "En bra hörnsoffa",
+    "name": "Soffa",
+    "description": "En bra soffa",
     "price": 12999
   },
   {
@@ -21,6 +21,12 @@
     "id": 4,
     "name": "Stol",
     "description": "En bra stol",
-    "price": "1599"
+    "price": "1299"
+  },
+  {
+    "id": 5,
+    "name": "Lampa",
+    "description": "En bra lampa",
+    "price": "599"
   }
 ]
