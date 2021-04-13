@@ -26,6 +26,7 @@ app.get("/api/products/:id", (req, res) => {
   });
 
   if (!foundProduct) {
+    res.status(404)
     res.json({ error: `Det finns ingen produkt med id: ${id}` });
   }
 
@@ -41,6 +42,7 @@ app.put("/api/products/:id", (req, res) => {
   });
 
   if (!updatedProduct) {
+    res.status(404)
     res.json({ error: `Det finns ingen produkt med id: ${id}` });
     return;
   }
@@ -94,6 +96,7 @@ app.delete("/api/products/:id", (req, res) => {
   });
 
   if (!deletedProduct) {
+    res.status(404)
     res.json({ error: `Det finns ingen produkt med id: ${id}` });
     return;
   }
