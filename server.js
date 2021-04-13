@@ -156,5 +156,4 @@ app.post("/api", (req, res) => {
 // körs när servern och express-appen är igång
 app.listen(port, () => {
   console.log(`App is running on http://localhost:${port}`);
-  console.log(jsonProducts)
 });

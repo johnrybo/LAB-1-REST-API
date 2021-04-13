@@ -114,27 +114,9 @@ async function showSpecificProduct(id) {
 
 // Ta bort en specifik produkt ////////////////////////////////////
 
-// const deleteForm = document.createElement("form");
-
-// const inputProductIdDelete = document.createElement("input");
-// inputProductIdDelete.placeholder = "Id";
-// inputProductIdDelete.required = true;
-
-// const getSpecificProductButtonDelete = document.createElement("button");
-// getSpecificProductButtonDelete.innerHTML = "Ta bort en specifik produkt";
-
-// deleteForm.append(inputProductIdDelete);
-// deleteForm.append(getSpecificProductButtonDelete);
-
-// getSpecificProductButtonDelete.addEventListener(
-//   "click",
-//   async () => await deleteSpecificProduct(inputProductIdDelete.value)
-// );
-
 async function deleteSpecificProduct(id) {
   const products = await makeRequest("/api", "GET");
   const product = await makeRequest("/api/products/" + id, "DELETE");
-  // inputProductIdDelete.value = "";
 
   var found = false;
   for (var i = 0; i < products.length; i++) {
@@ -198,11 +180,6 @@ async function updateSpecificProduct(id, name, description, price) {
   const body = { id: id, name: name, description: description, price: price };
   const products = await makeRequest("/api", "GET");
   const product = await makeRequest("/api/products/" + id, "PUT", body);
-
-  inputProductIdUpdate.value = "";
-  inputProductNameUpdate.value = "";
-  inputProductDescriptionUpdate.value = "";
-  inputProductPriceUpdate.value = "";
 
   var found = false;
   for (var i = 0; i < products.length; i++) {

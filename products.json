@@ -1,9 +1,9 @@
 [
   {
     "id": 1,
-    "name": "Stol",
-    "description": "En härlig stol",
-    "price": 1499
+    "name": "Pall",
+    "description": "En härlig pall",
+    "price": "1499"
   },
   {
     "id": 2,
@@ -12,21 +12,15 @@
     "price": 12999
   },
   {
-    "id": 4,
+    "id": 3,
     "name": "Matta",
-    "description": "En fin matta",
+    "description": "En jättefin matta",
     "price": "2499"
   },
   {
-    "id": 5,
+    "id": 4,
     "name": "Stol",
     "description": "En bra stol",
     "price": "1599"
-  },
-  {
-    "id": 6,
-    "name": "Lampa",
-    "description": "En bra lampa",
-    "price": "1499"
   }
 ]
