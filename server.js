@@ -1,21 +1,12 @@
 const express = require("express");
+
+const fs = require('fs');
+let jsonData = fs.readFileSync('./products.json')
+let jsonProducts = JSON.parse(jsonData);
+
+// const jsonProducts = require('./products.json')
 const app = express();
 const port = 3000;
-
-const products = [
-  {
-    id: 1,
-    name: "Stol",
-    description: "En härlig stol",
-    price: 1499
-  },
-  {
-    id: 2,
-    name: "Soffa",
-    description: "En skön soffa",
-    price: 8999
-  },
-];
 
 // Middleware (?)
 app.use(express.static("public"));
@@ -23,14 +14,14 @@ app.use(express.json());
 
 // GET-anrop som hämtar alla produkter
 app.get("/api", (req, res) => {
-  res.send(products);
+  res.send(jsonProducts);
 });
 
 // GET-anrop som hämtar en produkt med ett specifikt id
 app.get("/api/products/:id", (req, res) => {
   const id = req.params.id;
 
-  const foundProduct = products.find((product) => {
+  const foundProduct = jsonProducts.find((product) => {
     return product.id == id;
   });
 
@@ -45,7 +36,7 @@ app.get("/api/products/:id", (req, res) => {
 
 app.put("/api/products/:id", (req, res) => {
   const id = req.params.id;
-  const updatedProduct = products.find((product) => {
+  const updatedProduct = jsonProducts.find((product) => {
     return product.id == id;
   });
 
@@ -68,6 +59,10 @@ app.put("/api/products/:id", (req, res) => {
   updatedProduct.description = req.body.description;
   updatedProduct.price = req.body.price;
   res.send(updatedProduct);
+
+  let data = JSON.stringify(jsonProducts, null, 2)
+  fs.writeFileSync('./products.json', data)
+
  });
 
 // app.put("/api/products/:id", (req, res) => {
@@ -94,7 +89,7 @@ app.put("/api/products/:id", (req, res) => {
 
 app.delete("/api/products/:id", (req, res) => {
   const id = req.params.id;
-  const deletedProduct = products.find((product) => {
+  const deletedProduct = jsonProducts.find((product) => {
     return product.id == id;
   });
 
@@ -103,9 +98,12 @@ app.delete("/api/products/:id", (req, res) => {
     return;
   }
 
-  const index = products.indexOf(deletedProduct);
-  products.splice(index, 1);
+  const index = jsonProducts.indexOf(deletedProduct);
+  jsonProducts.splice(index, 1);
   res.json(deletedProduct);
+
+  let data = JSON.stringify(jsonProducts, null, 2)
+  fs.writeFileSync('./products.json', data)
 });
 
 // POST-anrop
@@ -131,7 +129,7 @@ app.post("/api", (req, res) => {
   const newProductPrice = req.body.price;
 
   let newProductId = 0;
-  products.forEach((product) => {
+  jsonProducts.forEach((product) => {
     if (product.id > newProductId) {
       newProductId = product.id;
     }
@@ -139,7 +137,7 @@ app.post("/api", (req, res) => {
 
   newProductId++;
 
-  products.push({
+  jsonProducts.push({
     id: newProductId,
     name: newProductName,
     description: newProductDescription,
@@ -149,9 +147,14 @@ app.post("/api", (req, res) => {
   res.json({
     status: "Ny produkt sparad",
   });
+
+  let data = JSON.stringify(jsonProducts, null, 2)
+  fs.writeFileSync('./products.json', data)
+
 });
 
 // körs när servern och express-appen är igång
 app.listen(port, () => {
   console.log(`App is running on http://localhost:${port}`);
+  console.log(jsonProducts)
 });

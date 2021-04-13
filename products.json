@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Stol",
+    "description": "En härlig stol",
+    "price": 1499
+  },
+  {
+    "id": 2,
+    "name": "Soffa",
+    "description": "En go soffa",
+    "price": "8999"
+  },
+  {
+    "id": 3,
+    "name": "Säng",
+    "description": "En liten säng",
+    "price": "9898"
+  }
+]
