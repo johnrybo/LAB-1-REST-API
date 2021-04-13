@@ -1,16 +1,11 @@
 window.addEventListener("load", main);
 
 function main() {
-  showAllProducts();
   document.body.append(getAllProductsButton);
   document.body.append(getSpecificProductForm);
-
-  // document.body.append(deleteForm);
-  // document.body.append(updateForm);
-  document.body.append(createForm);
+  document.body.append(createProductForm);
+  showAllProducts();
 }
-
-// Globala grejer
 
 // Hämta alla produkter ////////////////////////////////////
 
@@ -40,6 +35,7 @@ getSpecificProductButton.innerHTML = "Hämta en specifik produkt";
 
 getSpecificProductForm.append(inputProductId);
 getSpecificProductForm.append(getSpecificProductButton);
+getSpecificProductForm.addEventListener("submit", (event) => { event.preventDefault() })
 
 getSpecificProductButton.addEventListener(
   "click",
@@ -49,7 +45,7 @@ getSpecificProductButton.addEventListener(
 async function getSpecificProduct(id) {
   const products = await makeRequest("/api", "GET");
   const product = await makeRequest("/api/products/" + id, "GET");
-  // inputProductId.value = "";
+  inputProductId.value = "";
 
   var found = false;
   for (var i = 0; i < products.length; i++) {
@@ -69,6 +65,9 @@ async function getSpecificProduct(id) {
 
 async function showSpecificProduct(id) {
   const product = await makeRequest("/api/products/" + id, "GET");
+
+  let tableBody = document.querySelector("tbody");
+  tableBody.innerHTML = "";
 
   let tr = document.createElement("tr");
     let cell1 = document.createElement("td");
@@ -115,27 +114,27 @@ async function showSpecificProduct(id) {
 
 // Ta bort en specifik produkt ////////////////////////////////////
 
-const deleteForm = document.createElement("form");
+// const deleteForm = document.createElement("form");
 
-const inputProductIdDelete = document.createElement("input");
-inputProductIdDelete.placeholder = "Id";
-inputProductIdDelete.required = true;
+// const inputProductIdDelete = document.createElement("input");
+// inputProductIdDelete.placeholder = "Id";
+// inputProductIdDelete.required = true;
 
-const getSpecificProductButtonDelete = document.createElement("button");
-getSpecificProductButtonDelete.innerHTML = "Ta bort en specifik produkt";
+// const getSpecificProductButtonDelete = document.createElement("button");
+// getSpecificProductButtonDelete.innerHTML = "Ta bort en specifik produkt";
 
-deleteForm.append(inputProductIdDelete);
-deleteForm.append(getSpecificProductButtonDelete);
+// deleteForm.append(inputProductIdDelete);
+// deleteForm.append(getSpecificProductButtonDelete);
 
-getSpecificProductButtonDelete.addEventListener(
-  "click",
-  async () => await deleteSpecificProduct(inputProductIdDelete.value)
-);
+// getSpecificProductButtonDelete.addEventListener(
+//   "click",
+//   async () => await deleteSpecificProduct(inputProductIdDelete.value)
+// );
 
 async function deleteSpecificProduct(id) {
   const products = await makeRequest("/api", "GET");
   const product = await makeRequest("/api/products/" + id, "DELETE");
-  inputProductIdDelete.value = "";
+  // inputProductIdDelete.value = "";
 
   var found = false;
   for (var i = 0; i < products.length; i++) {
@@ -175,13 +174,14 @@ inputProductPriceUpdate.placeholder = "Pris";
 inputProductPriceUpdate.required = true;
 
 const getSpecificProductButtonUpdate = document.createElement("button");
-getSpecificProductButtonUpdate.innerHTML = "Uppdatera en specifik produkt";
+getSpecificProductButtonUpdate.innerHTML = "Uppdatera produkten";
 
 updateForm.append(inputProductIdUpdate);
 updateForm.append(inputProductNameUpdate);
 updateForm.append(inputProductDescriptionUpdate);
 updateForm.append(inputProductPriceUpdate);
 updateForm.append(getSpecificProductButtonUpdate);
+updateForm.addEventListener("submit", (event) => { event.preventDefault() })
 
 getSpecificProductButtonUpdate.addEventListener(
   "click",
@@ -215,14 +215,15 @@ async function updateSpecificProduct(id, name, description, price) {
   if (!found) {
     alert(JSON.stringify(product));
   } else {
-    showSpecificProduct(id);
+    showAllProducts()
+    document.body.removeChild(updateForm);
     return product;
   }
 }
 
 // Skapa en ny produkt ////////////////////////////////////
 
-const createForm = document.createElement("form");
+const createProductForm = document.createElement("form");
 
 const inputProductName = document.createElement("input");
 inputProductName.placeholder = "Namn";
@@ -237,12 +238,13 @@ inputProductPrice.placeholder = "Pris";
 inputProductPrice.required = true;
 
 const createProductButton = document.createElement("button");
-createProductButton.innerHTML = "Skapa en ny produkt";
+createProductButton.innerHTML = "Skapa ny produkt";
 
-createForm.append(inputProductName);
-createForm.append(inputProductDescription);
-createForm.append(inputProductPrice);
-createForm.append(createProductButton);
+createProductForm.append(inputProductName);
+createProductForm.append(inputProductDescription);
+createProductForm.append(inputProductPrice);
+createProductForm.append(createProductButton);
+createProductForm.addEventListener("submit", (event) => { event.preventDefault() })
 
 createProductButton.addEventListener(
   "click",
@@ -290,7 +292,7 @@ async function showAllProducts() {
     cell4.innerHTML = product.price;
 
     const button1 = document.createElement("button");
-    button1.innerHTML = "Redigera";
+    button1.innerHTML = "Uppdatera";
     button1.addEventListener("click", () => {
       document.body.append(updateForm);
       inputProductIdUpdate.value = product.id;
