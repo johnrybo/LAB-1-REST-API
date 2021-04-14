@@ -47,16 +47,6 @@ app.put("/api/products/:id", (req, res) => {
     return;
   }
 
-  // let newProductId = 0;
-  // products.forEach((product) => {
-  //   if (product.id > newProductId) {
-  //     newProductId = product.id;
-  //   }
-  // });
-
-  // newProductId++;
-  // updatedProduct.id = newProductId;
-
   updatedProduct.name = req.body.name;
   updatedProduct.description = req.body.description;
   updatedProduct.price = req.body.price;
@@ -66,28 +56,6 @@ app.put("/api/products/:id", (req, res) => {
   fs.writeFileSync('./products.json', data)
 
  });
-
-// app.put("/api/products/:id", (req, res) => {
-//   let updatedProduct = products.findIndex((product) => {
-//     return product.id == req.params.id;
-//   });
-
-//   updatedProduct = {
-//     id: req.body.id,
-//     name: req.body.name,
-//     description: req.body.description,
-//     price: req.body.price
-//   }
-
-//   let index = products.findIndex((product) => {
-//     return product.id == req.params.id
-//     });
-    
-//     products[index] = updatedProduct;
-//     return res.send(products);
-//    });
-
-// DELETE-anrop som tar bort en specifik produkt
 
 app.delete("/api/products/:id", (req, res) => {
   const id = req.params.id;

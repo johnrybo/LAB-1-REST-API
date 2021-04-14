@@ -1,14 +1,8 @@
 [
   {
-    "id": 1,
-    "name": "Pall",
-    "description": "En härlig pall",
-    "price": "1499"
-  },
-  {
     "id": 2,
-    "name": "Soffa",
-    "description": "En bra soffa",
+    "name": "Hörnsoffa",
+    "description": "En bra hörnsoffa",
     "price": 12999
   },
   {
@@ -19,14 +13,26 @@
   },
   {
     "id": 4,
-    "name": "Stol",
-    "description": "En bra stol",
-    "price": "1299"
+    "name": "Säng",
+    "description": "En skön säng",
+    "price": "11999"
   },
   {
     "id": 5,
-    "name": "Lampa",
-    "description": "En bra lampa",
-    "price": "599"
+    "name": "Stol",
+    "description": "En liten stol",
+    "price": "699"
+  },
+  {
+    "id": 6,
+    "name": "Matta",
+    "description": "En fin matta",
+    "price": 2499
+  },
+  {
+    "id": 9,
+    "name": "Sänglampa",
+    "description": "En helt ok sänglampa",
+    "price": "2499"
   }
 ]

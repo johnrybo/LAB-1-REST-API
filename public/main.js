@@ -65,12 +65,7 @@ async function getSpecificProduct(id) {
   }
 }
 
-async function showSpecificProduct(id) {
-  const product = await makeRequest("/api/products/" + id, "GET");
-
-  let tableBody = document.querySelector("tbody");
-  tableBody.innerHTML = "";
-
+function createTableRow(product) {
   let tr = document.createElement("tr");
   let cell1 = document.createElement("td");
   let cell2 = document.createElement("td");
@@ -105,6 +100,16 @@ async function showSpecificProduct(id) {
   cell6.append(button2);
 
   tr.append(cell1, cell2, cell3, cell4, cell5, cell6);
+  return tr
+}
+
+async function showSpecificProduct(id) {
+  const product = await makeRequest("/api/products/" + id, "GET");
+
+  let tableBody = document.querySelector("tbody");
+  tableBody.innerHTML = "";
+
+  const tr = createTableRow(product)
 
   tableBody.appendChild(tr);
 }
@@ -259,40 +264,7 @@ async function showAllProducts() {
   tableBody.innerHTML = "";
 
   products.forEach((product) => {
-    let tr = document.createElement("tr");
-    let cell1 = document.createElement("td");
-    let cell2 = document.createElement("td");
-    let cell3 = document.createElement("td");
-    let cell4 = document.createElement("td");
-    let cell5 = document.createElement("td");
-    let cell6 = document.createElement("td");
-
-    cell1.innerHTML = product.id;
-    cell2.innerHTML = product.name;
-    cell3.innerHTML = product.description;
-    cell4.innerHTML = product.price;
-
-    const button1 = document.createElement("button");
-    button1.innerHTML = "Uppdatera";
-    button1.addEventListener("click", () => {
-      document.body.append(updateForm);
-      inputProductIdUpdate.value = product.id;
-      inputProductNameUpdate.value = product.name;
-      inputProductDescriptionUpdate.value = product.description;
-      inputProductPriceUpdate.value = product.price;
-    });
-
-    const button2 = document.createElement("button");
-    button2.innerHTML = "Ta bort";
-    button2.addEventListener(
-      "click",
-      async () => await deleteSpecificProduct(product.id)
-    );
-
-    cell5.append(button1);
-    cell6.append(button2);
-
-    tr.append(cell1, cell2, cell3, cell4, cell5, cell6);
+    const tr = createTableRow(product)
 
     tableBody.appendChild(tr);
   });
