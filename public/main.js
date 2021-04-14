@@ -19,7 +19,7 @@ getAllProductsButton.addEventListener(
 );
 
 async function getAllProducts() {
-  const products = await makeRequest("/api", "GET");
+  const products = await makeRequest("/api/products/", "GET");
   showAllProducts();
   return products;
 }
@@ -45,7 +45,7 @@ getSpecificProductButton.addEventListener(
 );
 
 async function getSpecificProduct(id) {
-  const products = await makeRequest("/api", "GET");
+  const products = await makeRequest("/api/products/", "GET");
   const product = await makeRequest("/api/products/" + id, "GET");
   inputProductId.value = "";
 
@@ -117,7 +117,7 @@ async function showSpecificProduct(id) {
 // Ta bort en specifik produkt ////////////////////////////////////
 
 async function deleteSpecificProduct(id) {
-  const products = await makeRequest("/api", "GET");
+  const products = await makeRequest("/api/products/", "GET");
   const product = await makeRequest("/api/products/" + id, "DELETE");
 
   var found = false;
@@ -185,7 +185,7 @@ getSpecificProductButtonUpdate.addEventListener(
 
 async function updateSpecificProduct(id, name, description, price) {
   const body = { id: id, name: name, description: description, price: price };
-  const products = await makeRequest("/api", "GET");
+  const products = await makeRequest("/api/products/", "GET");
   const product = await makeRequest("/api/products/" + id, "PUT", body);
 
   var found = false;
@@ -246,7 +246,7 @@ createProductButton.addEventListener(
 
 async function createNewProduct(name, description, price) {
   const body = { name: name, description: description, price: price };
-  const status = await makeRequest("/api", "POST", body);
+  const status = await makeRequest("/api/products/", "POST", body);
   showAllProducts();
 
   inputProductName.value = "";
@@ -258,7 +258,7 @@ async function createNewProduct(name, description, price) {
 //////////////////////////////////////////////////////////////////////////
 
 async function showAllProducts() {
-  const products = await makeRequest("/api", "GET");
+  const products = await makeRequest("/api/products/", "GET");
 
   let tableBody = document.querySelector("tbody");
   tableBody.innerHTML = "";
