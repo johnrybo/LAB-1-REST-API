@@ -13,7 +13,7 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // GET-anrop som hämtar alla produkter
-app.get("/api", (req, res) => {
+app.get("/api/products", (req, res) => {
   res.send(jsonProducts);
 });
 
@@ -78,7 +78,7 @@ app.delete("/api/products/:id", (req, res) => {
 });
 
 // POST-anrop
-app.post("/api", (req, res) => {
+app.post("/api/products", (req, res) => {
 
   if (!req.body.name) {
     res.json({ error: "Produkten som försöker skapas saknar namn" });
