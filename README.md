@@ -6,7 +6,7 @@ Projektet gick ut på att skapa ett enklare REST-API i NodeJS med express med fu
 
 ## Uppfyllda krav
 
-Projektet innehåller endpoints för GET, POST, PUT och DELETE. Datan är sparad i en JSON-fil och ett ett enklare gränssnitt har skapats för att kunna visa upp resultatet även i webbläsaren.
+Projektet innehåller endpoints för GET, POST, PUT och DELETE. Datan är sparad i en JSON-fil och ett enklare gränssnitt har skapats för att kunna visa upp resultatet även i webbläsaren.
 
 ## Instruktioner
 
