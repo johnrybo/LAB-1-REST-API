@@ -9,7 +9,7 @@
     "id": 2,
     "name": "Soffa",
     "description": "En bra soffa",
-    "price": "11999"
+    "price": "12999"
   },
   {
     "id": 3,
@@ -27,7 +27,7 @@
     "id": 5,
     "name": "Matta",
     "description": "En fin matta",
-    "price": 2499
+    "price": "2499"
   },
   {
     "id": 6,

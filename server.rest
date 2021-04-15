@@ -12,7 +12,7 @@ Content-type: application/json
 {
     "name": "Hörnsoffa",
     "description": "En bra hörnsoffa",
-    "price": 12999
+    "price": "12999"
 }
 
 ###
@@ -27,5 +27,5 @@ Content-type: application/json
 {
     "name": "Matta",
     "description": "En fin matta",
-    "price": 2499
+    "price": "2499"
 }
