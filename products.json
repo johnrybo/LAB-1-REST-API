@@ -1,38 +1,38 @@
 [
-  {
-    "id": 1,
-    "name": "Matta",
-    "description": "En jättefin matta",
-    "price": "2499"
-  },
-  {
-    "id": 2,
-    "name": "Soffa",
-    "description": "En bra soffa",
-    "price": "12999"
-  },
-  {
-    "id": 3,
-    "name": "Säng",
-    "description": "En skön säng",
-    "price": "11999"
-  },
-  {
-    "id": 4,
-    "name": "Stol",
-    "description": "En liten stol",
-    "price": "699"
-  },
-  {
-    "id": 5,
-    "name": "Matta",
-    "description": "En fin matta",
-    "price": "2499"
-  },
-  {
-    "id": 6,
-    "name": "Sänglampa",
-    "description": "En helt ok sänglampa",
-    "price": "2499"
-  }
+    {
+        "id": 1,
+        "name": "Matta",
+        "description": "En jättefin matta",
+        "price": "2499"
+    },
+    {
+        "id": 2,
+        "name": "Soffa",
+        "description": "En bra soffa",
+        "price": "12999"
+    },
+    {
+        "id": 3,
+        "name": "Säng",
+        "description": "En skön säng",
+        "price": "11999"
+    },
+    {
+        "id": 4,
+        "name": "Stol",
+        "description": "En liten stol",
+        "price": "699"
+    },
+    {
+        "id": 5,
+        "name": "Matta",
+        "description": "En fin matta",
+        "price": "2499"
+    },
+    {
+        "id": 6,
+        "name": "Sänglampa",
+        "description": "En helt ok sänglampa",
+        "price": "2499"
+    }
 ]

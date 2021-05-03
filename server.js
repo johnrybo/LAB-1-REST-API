@@ -5,7 +5,7 @@ let jsonData = fs.readFileSync("./products.json");
 let jsonProducts = JSON.parse(jsonData);
 
 const app = express();
-const port = 3000;
+const port = 8000;
 
 // Middleware
 app.use(express.static("public"));
@@ -44,7 +44,6 @@ app.put("/api/products/:id", (req, res) => {
   }
 
   if (!req.body.price || !req.body.price.length) {
-    console.log("hej");
     res.status(400).json({ error: "Produkten som försöker uppdateras saknar pris" });
     return;
   }
@@ -64,6 +63,8 @@ app.put("/api/products/:id", (req, res) => {
   updatedProduct.price = req.body.price;
 
   res.send(updatedProduct);
+  fs.writeFileSync('./products.json', JSON.stringify(jsonProducts, null, 4));
+
 });
 
 app.delete("/api/products/:id", (req, res) => {
@@ -80,6 +81,8 @@ app.delete("/api/products/:id", (req, res) => {
   const index = jsonProducts.indexOf(deletedProduct);
   jsonProducts.splice(index, 1);
   res.json(deletedProduct);
+  fs.writeFileSync('./products.json', JSON.stringify(jsonProducts, null, 4));
+
 });
 
 // POST-anrop
@@ -120,6 +123,8 @@ app.post("/api/products/", (req, res) => {
   });
 
   res.json(req.body);
+  fs.writeFileSync('./products.json', JSON.stringify(jsonProducts, null, 4));
+
 });
 
 // körs när servern och express-appen är igång
